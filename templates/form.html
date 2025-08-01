@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f0f2f5, #cce0ff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .form-title {
+            text-align: center;
+            color: #004085;
+            margin-bottom: 20px;
+        }
+        .btn-success, .btn-primary, .btn-danger {
+            width: 100%;
+            border-radius: 25px;
+        }
+        .table-container {
+            margin-top: 40px;
+        }
+        .table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #004085;
+            color: white;
+        }
+    </style>
+</head>
+<body class="container py-5">
+
+    <div class="form-container">
+        <h2 class="form-title">🎓 Register a New Student</h2>
+        <form action="/add" method="post">
+            <div class="form-group">
+                <label><strong>Name</strong></label>
+                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <label><strong>Email</strong></label>
+                <input type="email" name="email" class="form-control" placeholder="example@domain.com" required>
+            </div>
+            <div class="form-group">
+                <label><strong>Course</strong></label>
+                <input type="text" name="course" class="form-control" placeholder="Course Name" required>
+            </div>
+            <button type="submit" class="btn btn-success">➕ Register Student</button>
+        </form>
+    </div>
+
+    <div class="form-container mt-5">
+        <h4 class="form-title">🔍 Search Students</h4>
+        <form action="/search" method="get" class="mb-3">
+            <input type="text" name="query" class="form-control mb-2" placeholder="Search by Name">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    {% if students %}
+    <div class="table-container">
+        <h4 class="form-title">📋 Registered Students</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.ID }}</td>
+                    <td>{{ student.Name }}</td>
+                    <td>{{ student.Email }}</td>
+                    <td>{{ student.Course }}</td>
+                    <td>
+                        <form action="/delete/{{ student.ID }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">❌ Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+</body>
+</html>
