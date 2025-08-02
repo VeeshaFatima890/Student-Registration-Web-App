@@ -3,7 +3,6 @@ import pyodbc
 
 app = Flask(__name__)
 
-# SQL Server connection
 conn = pyodbc.connect(
     'DRIVER={ODBC Driver 17 for SQL Server};'
     'SERVER=DESKTOP-5L4E2G3\\SQLEXPRESS;'
