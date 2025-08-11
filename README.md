@@ -39,7 +39,6 @@ A clean and functional full-stack web application that allows users to register,
 - Python packages: Flask and pyodbc
 
 Install packages:
-
 ```bash
 pip install flask pyodbc
 
